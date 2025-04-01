@@ -3,13 +3,13 @@ package com.flightbooking.model;
 import java.time.LocalDateTime;
 
 public class Flight {
-    private long flightID;
+    private Long flightID;
     private LocalDateTime departureTime;
     private String destination;
-    private int totalSeats;
-    private int availableSeats;
+    private Integer totalSeats;
+    private Integer availableSeats;
 
-    public Flight(long flightID, LocalDateTime departureTime, String destination, int totalSeats, int availableSeats) {
+    public Flight(Long flightID, LocalDateTime departureTime, String destination, Integer totalSeats, Integer availableSeats) {
         this.flightID = flightID;
         this.departureTime = departureTime;
         this.destination = destination;
@@ -17,7 +17,7 @@ public class Flight {
         this.availableSeats = availableSeats;
     }
 
-    public long getFlightID() {
+    public Long getFlightID() {
         return flightID;
     }
 
@@ -29,14 +29,14 @@ public class Flight {
         return destination;
     }
 
-    public int getTotalSeats() {
+    public Integer getTotalSeats() {
         return totalSeats;
     }
 
-    public int getAvailableSeats() {
+    public Integer getAvailableSeats() {
         return availableSeats;
     }
-    public void setAvailableSeats(int availableSeats) {
+    public void setAvailableSeats(Integer availableSeats) {
         this.availableSeats = availableSeats;
     }
     @Override
