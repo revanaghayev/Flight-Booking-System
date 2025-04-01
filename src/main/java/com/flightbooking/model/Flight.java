@@ -1,8 +1,9 @@
 package com.flightbooking.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Flight {
+public class Flight implements Serializable {
     private Long flightID;
     private LocalDateTime departureTime;
     private String destination;
