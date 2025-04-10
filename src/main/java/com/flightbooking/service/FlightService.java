@@ -20,16 +20,24 @@ public class FlightService {
         return flightDAO.getUpcomingFlights();
     }
 
-    public List<Flight> searchFlights(String destination, int requiredSeats) {
+    public List<Flight> searchFlights(String destination, Integer requiredSeats) {
         return flightDAO.searchFlights(destination, requiredSeats);
     }
 
-    public boolean bookFlight(Long flightID, int seatsToBook) {
+    public boolean bookFlight(Long flightID, Integer seatsToBook) {
         return flightDAO.updateAvailableSeats(flightID, seatsToBook);
     }
 
     public void addFlight(Flight flight) {
         flightDAO.addFlight(flight);
         flightDAO.saveFlights();
+    }
+    public void deleteFlight(Long flightID) {
+        flightDAO.deleteFlight(flightID);
+        flightDAO.saveFlights();
+    }
+
+    public Flight getFlightById(Long flightID) {
+        return flightDAO.getFlightById(flightID);
     }
 }

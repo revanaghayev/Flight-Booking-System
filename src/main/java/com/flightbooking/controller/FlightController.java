@@ -29,7 +29,7 @@ public class FlightController {
         }
     }
 
-    public void searchFlights(String destination, int requiredSeats) {
+    public void searchFlights(String destination, Integer requiredSeats) {
         List<Flight> flights = flightService.searchFlights(destination, requiredSeats);
         if(flights.isEmpty()) {
             System.out.println("No flights found matching your criteria.");
@@ -38,7 +38,7 @@ public class FlightController {
         }
     }
 
-    public void bookFlight(Long flightID, int seatsToBook) {
+    public void bookFlight(Long flightID, Integer seatsToBook) {
         boolean success = flightService.bookFlight(flightID, seatsToBook);
         if(success) {
             System.out.println("Booking successful! " + seatsToBook + " seats booked.");
@@ -46,9 +46,26 @@ public class FlightController {
             System.out.println("Booking failed!");
         }
     }
-    public void addFlight(Long flightID, LocalDateTime departureTime, String destination, int totalSeats) {
+    public void addFlight(Long flightID, LocalDateTime departureTime, String destination, Integer totalSeats) {
         Flight newFlight = new Flight(flightID, departureTime, destination, totalSeats, totalSeats);
         flightService.addFlight(newFlight);
         System.out.println("New flight added successfully: " + newFlight);
+    }
+    public void deleteFlight(Long flightID) {
+        try {
+            flightService.deleteFlight(flightID);
+            System.out.println("Flight deleted successfully: " + flightID);
+        } catch (Exception e) {
+            System.out.println("Error deleting flight: " + flightID);
+        }
+    }
+
+    public void getFlightById(Long flightID) {
+        Flight flight = flightService.getFlightById(flightID);
+        if(flight != null) {
+            System.out.println("Flight found: " + flight);
+        } else {
+            System.out.println("Flight not found!");
+        }
     }
 }

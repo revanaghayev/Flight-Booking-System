@@ -42,14 +42,21 @@ public class FlightDAOImpl implements FlightDAO {
     }
 
     @Override
-    public List<Flight> searchFlights(String destination, int requiredSeats) {
+    public List<Flight> searchFlights(String destination, Integer requiredSeats) {
         return flights.stream()
                 .filter(f -> f.getDestination().equalsIgnoreCase(destination) && f.getAvailableSeats() >= requiredSeats)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public boolean updateAvailableSeats(Long flightID, int seatsToBook) {
+    public Flight getFlightById(Long flightId) {
+        return flights.stream()
+                .filter(flight -> flight.getFlightID().equals(flightId))
+                .findFirst().orElse(null);
+    }
+
+    @Override
+    public boolean updateAvailableSeats(Long flightID, Integer seatsToBook) {
         for(Flight flight : flights) {
             if(flight.getFlightID().equals(flightID) && flight.getAvailableSeats() >= seatsToBook) {
                 flight.setAvailableSeats(flight.getAvailableSeats() - seatsToBook);
@@ -76,6 +83,16 @@ public class FlightDAOImpl implements FlightDAO {
             saveFlights();
         } else {
             System.out.println("Flight already exists: " + flight.getFlightID());
+        }
+    }
+
+    @Override
+    public void deleteFlight(Long flightID) {
+        if(flights.stream().anyMatch(fl -> fl.getFlightID().equals(flightID))) {
+            flights.remove(flightID);
+            saveFlights();
+        } else {
+            System.out.println("Flight does not exist: " + flightID);
         }
     }
 }
